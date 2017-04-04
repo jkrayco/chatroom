@@ -22,7 +22,7 @@ while keep_alive:
 	r_ready, w_ready, err = select.select(inputs, outputs, [], 0)
 	for sample in r_ready:
 		if sample == s:
-			c, c_addr = s.accept()	#Socket, Address
+			c, c_addr = s.accept()
 			name=c_addr[0]	#Address
 			inputs.append(c)	#Message + Socket
 			sys_msg="Welcome to the chat room!"
