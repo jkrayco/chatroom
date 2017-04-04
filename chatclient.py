@@ -16,8 +16,8 @@ print("Port:", port)
 
 def send():
 	while 1:
-		msg_out=sys.stdin.readline()		//unicode
-		msg_out=msg_out.encode('utf-8')		//utf-8
+		msg_out=sys.stdin.readline()
+		msg_out=msg_out.encode('utf-8')
 		c.send(msg_out)
 		
 

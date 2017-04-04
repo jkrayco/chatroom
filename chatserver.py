@@ -94,14 +94,14 @@ while keep_alive:
 						sample.send(("But your IP address is "+addresses[sample]).encode('utf-8'))
 						continue
 
-					elif bufftry3 == 'whisper ':
+					elif bufftry3 == 'pm ':
 						buff = buff[8:]
 						if buff[0] == '\n':
 							sample.send("Nobody to talk to, nothing to say... sad...".encode('utf-8'))
 							continue
 						buff = list(buff.partition(' '))
 						if buff[1] != ' ':
-								sample.send("Why whisper if you won't talk?".encode('utf-8'))
+								sample.send("Why pm if you won't talk?".encode('utf-8'))
 								continue
 						buff[0]=buff[0]+'\n'
 						if buff[0] in names.values():
@@ -109,7 +109,7 @@ while keep_alive:
 								sample.send("But... this is you... Talking to yourself?".encode('utf-8'))
 							else:
 								bufftry3 = list(names.keys())[list(names.values()).index(buff[0])]
-								bufftry3.send((names[sample].strip()+'(whisper):'+buff[2]).encode('utf-8'))
+								bufftry3.send((names[sample].strip()+'(pm):'+buff[2]).encode('utf-8'))
 							continue
 						else:
 							sample.send("There is no such user.".encode('utf-8'))
@@ -122,7 +122,7 @@ while keep_alive:
 						sample.send('/userinfo [username] - gets the IP address of username. (Recommended for stalkers)\n'.encode('utf-8'))
 						sample.send('/time - gets current time. (Recommended for latecomers)\n'.encode('utf-8'))
 						sample.send('/whoami - gets your IP address. (Recommended for philosphers)\n'.encode('utf-8'))
-						sample.send('/whisper [username] [message] - private message to username (Recommended for secrets)\n'.encode('utf-8'))
+						sample.send('/pm [username] [message] - private message to username (Recommended for secrets)\n'.encode('utf-8'))
 						sample.send('/help - brings up this screen again\n'.encode('utf-8'))
 						sample.send('/quit - disconnects from socket and exits\n'.encode('utf-8'))
 						continue
