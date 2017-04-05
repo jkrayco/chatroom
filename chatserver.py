@@ -2,6 +2,7 @@ import socket
 import select
 import sys
 import datetime
+import time
 
 serv_ip = '127.0.0.1'
 port = 12314
@@ -46,6 +47,7 @@ while keep_alive:
 					bufftry=buff[0:11]
 					bufftry2=buff[0:9]
 					bufftry3=buff[0:3]
+					bufftry4=buff[0:6]
 					if buff == 'quit\n':
 						sample.close()
 						msg = names[sample].strip('\n')+" has left."
@@ -94,6 +96,23 @@ while keep_alive:
 						else:
 							sample.send("There is no such user.".encode('utf-8'))
 							continue
+
+					elif bufftry4 == 'delay ':
+						buff=buff[6:]
+						if buff[0] == '\n':
+							sample.send("Please include delay time in seconds".encode('utf-8'))
+							continue
+						buff = list(buff.partition(' '))
+						if buff[1] != ' ':
+								sample.send("What to delay if you won't talk?".encode('utf-8'))
+								continue
+						val = int(buff[0])
+						if isinstance( val, int ):
+							time.sleep(val)
+							sample.send("this message is delay by n seconds!".encode('utf-8'))	#test message only(sends message sa user only)
+						else:
+							sample.send("Please input number!".encode('utf-8'))
+						continue
 
 					elif buff == 'help\n':
 						sample.send('Any text not preceeded by a \'/\' is treated as a broadcast message.\n'.encode('utf-8'))
